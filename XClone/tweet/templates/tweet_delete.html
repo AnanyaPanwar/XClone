@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete post - XClone{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+
+    <h1 class="h4 fw-bold mb-2">Delete this post?</h1>
+    <p class="text-body-secondary mb-4">This can't be undone.</p>
+
+    <div class="border rounded p-3 mb-4">
+      <p class="mb-2">{{ tweet.text|linebreaksbr }}</p>
+      {% if tweet.photo %}
+        <img src="{{ tweet.photo.url }}" alt="Photo attached to post"
+             class="img-fluid rounded border" style="max-height: 200px;">
+      {% endif %}
+    </div>
+
+    <form method="post" class="d-flex gap-2">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger fw-semibold">Delete post</button>
+      <a href="{% url 'tweet_list' %}" class="btn btn-outline-light">Cancel</a>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

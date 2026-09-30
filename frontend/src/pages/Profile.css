@@ -1,0 +1,625 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  box-sizing: border-box;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Profile Header */
+
+.profile-header {
+  max-width: 900px;
+  margin: 0 auto 24px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #334155;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h1 {
+  margin: 0 0 8px;
+  color: #f8fafc;
+  font-size: 26px;
+}
+
+.profile-bio {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+/* Header Buttons */
+
+.profile-header-actions {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.profile-header-actions button {
+  width: 130px;
+  height: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Edit Profile */
+
+.profile-header-actions .edit-profile-button {
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.profile-header-actions .edit-profile-button:hover {
+  background: #334155;
+}
+
+/* Home */
+
+.profile-header-actions .profile-home-button {
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.profile-header-actions .profile-home-button:hover {
+  background: #334155;
+}
+
+/* Remove browser focus highlight */
+
+.profile-header-actions button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.profile-header-actions button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Profile Stats */
+
+.profile-stats {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.profile-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-stats strong {
+  color: #f8fafc;
+  font-size: 20px;
+}
+
+.profile-stats span {
+  color: #94a3b8;
+}
+
+/* Edit Profile Section */
+
+.edit-profile {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 24px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.edit-profile h2 {
+  margin-top: 0;
+  color: #f8fafc;
+}
+
+.edit-profile form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-profile label {
+  display: block;
+  margin: 16px 0 8px;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.edit-profile textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.edit-profile textarea:focus {
+  outline: none;
+  border-color: #64748b;
+}
+
+.edit-profile input[type="file"] {
+  padding: 8px 0;
+  color: #cbd5e1;
+}
+
+.edit-profile-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.edit-profile-actions button {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  background: #475569;
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.edit-profile-actions button:hover {
+  background: #64748b;
+}
+
+.edit-profile-actions button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.edit-profile-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.profile-error {
+  color: #f87171;
+  margin: 8px 0;
+}
+
+/* Tweets */
+
+.profile-tweets {
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 24px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.profile-tweets h2 {
+  margin-top: 0;
+  color: #f8fafc;
+}
+
+.profile-tweet {
+  position: relative;
+  padding: 18px;
+  margin-bottom: 12px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.profile-tweet:last-child {
+  margin-bottom: 0;
+}
+
+.profile-tweet-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-tweet-user {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.profile-tweet p {
+  margin: 12px 0;
+  color: #f1f5f9;
+  line-height: 1.6;
+}
+
+.profile-tweet-meta {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Tweet Three-dot Menu */
+
+.profile-tweet-menu {
+  position: relative;
+  margin-left: auto;
+}
+
+.profile-tweet-menu-button {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 24px;
+  line-height: 1;
+  padding: 2px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-tweet-menu-button:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.profile-tweet-menu-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.profile-tweet-dropdown {
+  position: absolute;
+  right: 0;
+  top: 34px;
+  width: 150px;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.profile-tweet-dropdown button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 11px 12px;
+  text-align: left;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.profile-tweet-dropdown button:hover {
+  background: #334155;
+}
+
+/* Tweet Editing */
+
+.profile-tweet-edit textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: #111827;
+  color: #f1f5f9;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.profile-tweet-edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.profile-tweet-edit-actions button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #475569;
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.profile-tweet-edit-actions button:hover {
+  background: #64748b;
+}
+
+.profile-tweet-edit-actions button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.profile-tweet-edit-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 20px 12px;
+  }
+
+  .profile-header {
+    padding: 20px;
+    align-items: flex-start;
+  }
+
+  .profile-avatar {
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+  }
+
+  .profile-info h1 {
+    font-size: 22px;
+  }
+
+  .profile-header-actions button {
+    width: 110px;
+  }
+
+  .profile-stats {
+    gap: 20px;
+  }
+}
+
+.profile-header-actions button:focus,
+.profile-header-actions button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.profile-header-actions .profile-edit-button {
+  width: 130px;
+  height: 40px;
+  margin: 0;
+  padding: 9px 12px;
+  box-sizing: border-box;
+
+  border: 1px solid #334155;
+  border-radius: 8px;
+
+  background: #1e293b;
+  color: #e2e8f0;
+
+  font-size: 15px;
+  cursor: pointer;
+
+  outline: none;
+  box-shadow: none;
+}
+
+.profile-header-actions .profile-edit-button:hover {
+  background: #334155;
+}
+
+.profile-header-actions .profile-edit-button:focus,
+.profile-header-actions .profile-edit-button:focus-visible,
+.profile-header-actions .profile-edit-button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+.profile-tweet-photo {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  margin-top: 14px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.photo-upload-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.photo-upload-button:hover {
+  background: #475569;
+}
+
+.photo-upload-button input {
+  display: none;
+}
+
+.selected-photo {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Profile Light Mode */
+
+.app.light-mode .profile-page {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.app.light-mode .profile-header,
+.app.light-mode .profile-stats,
+.app.light-mode .edit-profile,
+.app.light-mode .profile-tweets {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.app.light-mode .profile-info h1,
+.app.light-mode .profile-tweets h2,
+.app.light-mode .edit-profile h2 {
+  color: #0f172a;
+}
+
+.app.light-mode .profile-bio {
+  color: #475569;
+}
+
+.app.light-mode .profile-avatar {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.app.light-mode .profile-tweet {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.app.light-mode .profile-tweet-user {
+  color: #0f172a;
+}
+
+.app.light-mode .profile-tweet p {
+  color: #1e293b;
+}
+
+.app.light-mode .profile-tweet-meta {
+  color: #64748b;
+}
+
+.app.light-mode .profile-header-actions .profile-edit-button,
+.app.light-mode .profile-header-actions .profile-home-button {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.app.light-mode .profile-header-actions .profile-edit-button:hover,
+.app.light-mode .profile-header-actions .profile-home-button:hover {
+  background: #e2e8f0;
+}
+
+.app.light-mode .profile-tweet-menu-button {
+  color: #64748b;
+}
+
+.app.light-mode .profile-tweet-menu-button:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.app.light-mode .profile-tweet-dropdown {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.app.light-mode .profile-tweet-dropdown button {
+  color: #334155;
+}
+
+.app.light-mode .profile-tweet-dropdown button:hover {
+  background: #e2e8f0;
+}
+
+.app.light-mode .edit-profile textarea,
+.app.light-mode .profile-tweet-edit textarea {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.profile-header-actions .profile-theme-button {
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.profile-header-actions .profile-theme-button:hover {
+  background: #334155;
+}
+
+.app.light-mode .profile-header-actions .profile-theme-button {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.app.light-mode .profile-header-actions .profile-theme-button:hover {
+  background: #e2e8f0;
+}
+
+
+.profile-comments-toggle {
+  display: block;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.profile-comments-toggle:hover {
+  text-decoration: underline;
+}
+
+.profile-comments-expanded {
+  margin-top: 8px;
+}
+
+.profile-comment {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.profile-comment-user {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.profile-comment p {
+  margin: 0;
+}

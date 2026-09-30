@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}{% if form.instance.pk %}Edit post{% else %}New post{% endif %} - XClone{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+
+    <h1 class="h4 fw-bold mb-4">
+      {% if form.instance.pk %}Edit post{% else %}New post{% endif %}
+    </h1>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="mb-3">
+        <label for="id_text" class="form-label">Text</label>
+        <textarea name="text" id="id_text" rows="4" maxlength="300" required autofocus
+                  class="form-control {% if form.text.errors %}is-invalid{% endif %}">{{ form.text.value|default:'' }}</textarea>
+        {% for error in form.text.errors %}
+          <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+        <div class="form-text">300 characters maximum.</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="id_photo" class="form-label">Photo (optional)</label>
+
+        <!-- Shown only when editing a post that already has a photo -->
+        {% if form.initial.photo %}
+          <div class="mb-2">
+            <img src="{{ form.initial.photo.url }}" alt="Current photo"
+                 class="img-fluid rounded border" style="max-height: 250px;">
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="photo-clear" id="photo-clear">
+            <label class="form-check-label" for="photo-clear">Remove this photo</label>
+          </div>
+          <div class="form-text mb-2">Choose a file below to replace it.</div>
+        {% endif %}
+
+        <input type="file" name="photo" id="id_photo" accept="image/*"
+               class="form-control {% if form.photo.errors %}is-invalid{% endif %}">
+        {% for error in form.photo.errors %}
+          <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-light fw-semibold">
+          {% if form.instance.pk %}Save changes{% else %}Post{% endif %}
+        </button>
+        <a href="{% url 'tweet_list' %}" class="btn btn-outline-light">Cancel</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
