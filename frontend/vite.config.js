@@ -6,7 +6,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   preview: {
-    allowedHosts: ['xclone-frontend-aqz3.onrender.com'],
+    allowedHosts: true,
   },
 })
 
