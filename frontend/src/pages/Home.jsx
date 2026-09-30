@@ -428,25 +428,38 @@ function Home({
               />
 
               <div className="composer-actions">
-                <label className="photo-upload-button">
-                  📷 Add Photo
+                <div className="photo-action-group">
+                  <label className="photo-upload-button">
+                    📷 Add Photo
 
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(event) =>
-                      setTweetPhoto(
-                        event.target.files[0] || null
-                      )
-                    }
-                  />
-                </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(event) =>
+                        setTweetPhoto(
+                          event.target.files[0] || null
+                        )
+                      }
+                    />
+                  </label>
 
-                {tweetPhoto && (
-                  <span className="selected-photo-name">
-                    📎 {tweetPhoto.name}
-                  </span>
-                )}
+                  {tweetPhoto && (
+                    <span className="selected-photo-name">
+                      📎 {tweetPhoto.name}
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="primary-button"
+                  disabled={
+                    posting ||
+                    (!content.trim() && !tweetPhoto)
+                  }
+                >
+                  {posting ? "Posting..." : "Post"}
+                </button>
               </div>
 
                     
