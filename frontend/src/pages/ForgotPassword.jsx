@@ -5,17 +5,15 @@ import "./Login.css";
 function ForgotPassword({
   onLogin,
   onResetPassword,
-}) {  
+}) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setError("");
-    setSuccess("");
     setLoading(true);
 
     try {
@@ -23,13 +21,10 @@ function ForgotPassword({
         username,
       });
 
-      setSuccess(
-        "If that account exists, a reset code has been sent to your email."
-      );
-
       onResetPassword(username);
 
-      setUsername("");
+      setUsername("");;
+
     } catch (error) {
       console.error(
         "Forgot password error:",
@@ -52,10 +47,8 @@ function ForgotPassword({
         <h1>Forgot your password?</h1>
 
         <p>
-          <p>
-            Enter your XClone username to receive a
-            password reset code.
-          </p>
+          Enter your XClone username to receive a
+          password reset code.
         </p>
 
         <form
@@ -65,12 +58,6 @@ function ForgotPassword({
           {error && (
             <div className="auth-error">
               {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="auth-success">
-              {success}
             </div>
           )}
 
@@ -106,6 +93,7 @@ function ForgotPassword({
         <p className="register-text">
           Remember your password?{" "}
           <span
+            type="button"
             className="register-link"
             onClick={onLogin}
           >

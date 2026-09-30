@@ -442,18 +442,11 @@ function Home({
                   />
                 </label>
 
-                <button
-                  className="primary-button"
-                  type="submit"
-                  disabled={
-                    posting ||
-                    (!content.trim() && !tweetPhoto)
-                  }
-                >
-                  {posting
-                    ? "Posting..."
-                    : "Post Tweet"}
-                </button>
+                {tweetPhoto && (
+                  <span className="selected-photo-name">
+                    📎 {tweetPhoto.name}
+                  </span>
+                )}
               </div>
 
                     

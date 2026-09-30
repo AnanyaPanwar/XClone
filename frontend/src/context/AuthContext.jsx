@@ -15,7 +15,6 @@ export function AuthProvider({ children }) {
   // LOGIN
   const login = async (username, password) => {
     try {
-      setLoading(true);
 
       const response = await api.post(
         "auth/login/",
@@ -53,11 +52,10 @@ export function AuthProvider({ children }) {
       // don't leave the app in a broken state.
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
+
       setUser(null);
 
       throw error;
-    } finally {
-      setLoading(false);
     }
   };
 

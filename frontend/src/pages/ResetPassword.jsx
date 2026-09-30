@@ -1,174 +1,182 @@
-import { useState } from "react";
-import api from "../api/axios";
-import "./Login.css";
+  import { useState } from "react";
+  import api from "../api/axios";
+  import "./Login.css";
 
-function ResetPassword({ username, onLogin }) {
-  const [code, setCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] =
-    useState("");
+  function ResetPassword({ username, onLogin, onResetSuccess }) {
+    const [code, setCode] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] =
+      useState("");
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+      event.preventDefault();
 
-    setError("");
-    setSuccess("");
+      setError("");
+      setSuccess("");
 
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      const response = await api.post(
-        "password/reset/",
-        {
-          username,
-          code,
-          new_password: newPassword,
-        }
-      );
-
-      setSuccess(
-        response.data.detail ||
-          "Password reset successfully."
-      );
-
-      setCode("");
-      setNewPassword("");
-      setConfirmPassword("");
-    } catch (error) {
-      console.error(
-        "Password reset error:",
-        error.response?.data
-      );
-
-      const detail =
-        error.response?.data?.detail;
-
-      if (Array.isArray(detail)) {
-        setError(detail.join(" "));
-      } else {
-        setError(
-          detail ||
-            "Password reset failed. Please try again."
-        );
+      if (newPassword !== confirmPassword) {
+        setError("Passwords do not match.");
+        return;
       }
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  return (
-    <div className="auth-page">
-      <div className="auth-container">
+      try {
+        setLoading(true);
 
-        <h1>Reset your password</h1>
+        const response = await api.post(
+          "password/reset/",
+          {
+            username,
+            code,
+            new_password: newPassword,
+          }
+        );
 
-        <p>
-          Enter the reset code sent to your email
-          and choose a new password.
-        </p>
+        setSuccess(
+          response.data.detail ||
+            "Password reset successfully."
+        );
 
-        <form
-          className="auth-form"
-          onSubmit={handleSubmit}
-        >
-          {error && (
-            <div className="auth-error">
-              {error}
-            </div>
-          )}
+        setCode("");
+        setNewPassword("");
+        setConfirmPassword("");
 
-          {success && (
-            <div className="auth-success">
-              {success}
-            </div>
-          )}
 
-          <div className="form-group">
-            <label htmlFor="reset-code">
-              Reset code
-            </label>
+        onResetSuccess(
+          "Password changed successfully. You can now sign in."
+        );
+        // Return to the login screen
+        // after a successful password reset.
+        
+      } catch (error) {
+        console.error(
+          "Password reset error:",
+          error.response?.data
+        );
 
-            <input
-              id="reset-code"
-              type="text"
-              value={code}
-              onChange={(event) =>
-                setCode(event.target.value)
-              }
-              required
-              autoFocus
-            />
-          </div>
+        const detail =
+          error.response?.data?.detail;
 
-          <div className="form-group">
-            <label htmlFor="new-password">
-              New password
-            </label>
+        if (Array.isArray(detail)) {
+          setError(detail.join(" "));
+        } else {
+          setError(
+            detail ||
+              "Password reset failed. Please try again."
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-            <input
-              id="new-password"
-              type="password"
-              value={newPassword}
-              onChange={(event) =>
-                setNewPassword(event.target.value)
-              }
-              autoComplete="new-password"
-              required
-            />
-          </div>
+    return (
+      <div className="auth-page">
+        <div className="auth-container">
 
-          <div className="form-group">
-            <label htmlFor="confirm-password">
-              Confirm new password
-            </label>
+          <h1>Reset your password</h1>
 
-            <input
-              id="confirm-password"
-              type="password"
-              value={confirmPassword}
-              onChange={(event) =>
-                setConfirmPassword(
-                  event.target.value
-                )
-              }
-              autoComplete="new-password"
-              required
-            />
-          </div>
+          <p>
+            Enter the reset code sent to your email
+            and choose a new password.
+          </p>
 
-          <button
-            type="submit"
-            className="auth-primary-button"
-            disabled={loading}
+          <form
+            className="auth-form"
+            onSubmit={handleSubmit}
           >
-            {loading
-              ? "Resetting..."
-              : "Reset password"}
-          </button>
-        </form>
+            {error && (
+              <div className="auth-error">
+                {error}
+              </div>
+            )}
 
-        <p className="register-text">
-          Remember your password?{" "}
-          <span
-            className="register-link"
-            onClick={onLogin}
-          >
-            Sign in
-          </span>
-        </p>
+            {success && (
+              <div className="auth-success">
+                {success}
+              </div>
+            )}
 
+            <div className="form-group">
+              <label htmlFor="reset-code">
+                Reset code
+              </label>
+
+              <input
+                id="reset-code"
+                type="text"
+                value={code}
+                onChange={(event) =>
+                  setCode(event.target.value)
+                }
+                required
+                autoFocus
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="new-password">
+                New password
+              </label>
+
+              <input
+                id="new-password"
+                type="password"
+                value={newPassword}
+                onChange={(event) =>
+                  setNewPassword(event.target.value)
+                }
+                autoComplete="new-password"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirm-password">
+                Confirm new password
+              </label>
+
+              <input
+                id="confirm-password"
+                type="password"
+                value={confirmPassword}
+                onChange={(event) =>
+                  setConfirmPassword(
+                    event.target.value
+                  )
+                }
+                autoComplete="new-password"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="auth-primary-button"
+              disabled={loading}
+            >
+              {loading
+                ? "Resetting..."
+                : "Reset password"}
+            </button>
+          </form>
+
+          <p className="register-text">
+            Remember your password?{" "}
+            <span
+              className="register-link"
+              onClick={onLogin}
+            >
+              Sign in
+            </span>
+          </p>
+
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-export default ResetPassword;
+  export default ResetPassword;

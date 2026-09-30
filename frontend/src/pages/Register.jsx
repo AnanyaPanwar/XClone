@@ -2,21 +2,22 @@ import { useState } from "react";
 import api from "../api/axios";
 import "./Login.css";
 
-function Register({ onLogin }) {
+function Register({
+  onLogin,
+  onRegisterSuccess,
+}) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setError("");
-    setSuccess("");
 
     if (password1 !== password2) {
       setError("Passwords do not match.");
@@ -33,14 +34,13 @@ function Register({ onLogin }) {
         password2,
       });
 
-      setSuccess(
-        "Account created successfully. You can now sign in."
-      );
-
       setUsername("");
       setEmail("");
       setPassword1("");
       setPassword2("");
+
+      onRegisterSuccess("Account created successfully. You can now sign in.")
+
     } catch (error) {
       console.error(
         "Registration error:",
@@ -84,12 +84,6 @@ function Register({ onLogin }) {
             </div>
           )}
 
-          {success && (
-            <div className="auth-success">
-              {success}
-            </div>
-          )}
-
           <div className="form-group">
             <label htmlFor="register-username">
               Username
@@ -102,7 +96,7 @@ function Register({ onLogin }) {
               onChange={(event) =>
                 setUsername(event.target.value)
               }
-              autoComplete="username"
+              autoComplete="off"
               autoFocus
               required
             />
@@ -173,8 +167,8 @@ function Register({ onLogin }) {
         <p className="register-text">
           Already have an account?{" "}
           <span
-            className="register-link-button"
-            onClick={onLogin}
+            className="register-link"
+            onClick={()=>onLogin()}
           >
             <u><b>Sign in</b></u>
           </span>

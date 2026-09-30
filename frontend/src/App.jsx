@@ -14,6 +14,8 @@ function App() {
   const [showRegister, setShowRegister] =
   useState(false);
 
+  const [loginSuccess, setLoginSuccess] = useState("");
+
   const [showForgotPassword, setShowForgotPassword] =
   useState(false);
 
@@ -127,6 +129,12 @@ function App() {
         username={resetUsername}
         onLogin={() => {
           setResetUsername("");
+
+          setLoginSuccess("");
+        }}
+        onResetSuccess={(message) => {
+          setResetUsername("");
+          setLoginSuccess(message);
         }}
       />
     );
@@ -137,6 +145,11 @@ function App() {
       <Register
         onLogin={() => {
           setShowRegister(false);
+          setLoginSuccess("");
+        }}
+        onRegisterSuccess={(message) => {
+          setShowRegister(false);
+          setLoginSuccess(message);
         }}
       />
     );
@@ -145,10 +158,16 @@ function App() {
   if (!user) {
     return (
       <Login
+        success={loginSuccess}
+        onLoginSuccess={() => {
+          setLoginSuccess("");
+          }}        
         onRegister={() => {
+          setLoginSuccess("");
           setShowRegister(true);
         }}
         onForgotPassword={() => {
+          setLoginSuccess("");
           setShowForgotPassword(true);
         }}
       />

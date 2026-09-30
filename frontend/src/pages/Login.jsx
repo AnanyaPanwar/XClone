@@ -5,12 +5,15 @@ import "./Login.css";
 function Login({
   onRegister,
   onForgotPassword,
+  onLoginSuccess,
+  success,
 }) {
-  const { login, loading } = useAuth();
+  const { login } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,13 +21,15 @@ function Login({
 
     try {
       await login(username, password);
+      onLoginSuccess();
     } catch (error) {
       setError(
-        error.response?.data?.detail ||
-          "Login failed. Please check your username and password."
+        "Wrong username or password. Please try again."
       );
+    } finally{
+      setSubmitting(false)
     }
-  };
+};
 
   return (
     <div className="auth-page">
@@ -36,6 +41,12 @@ function Login({
           className="auth-form"
           onSubmit={handleSubmit}
         >
+          {success && (
+            <div className="auth-success">
+              {success}
+            </div>
+          )}
+
           {error && (
             <div className="auth-error">
               {error}
@@ -54,7 +65,7 @@ function Login({
               onChange={(event) =>
                 setUsername(event.target.value)
               }
-              autoComplete="username"
+              autoComplete="off"
               autoFocus
               required
             />
@@ -72,7 +83,7 @@ function Login({
               onChange={(event) =>
                 setPassword(event.target.value)
               }
-              autoComplete="current-password"
+              autoComplete="new-password"
               required
             />
           </div>
@@ -89,9 +100,9 @@ function Login({
           <button
             type="submit"
             className="auth-primary-button"
-            disabled={loading}
+            disabled={submitting}
           >
-            {loading
+            {submitting
               ? "Signing in..."
               : "Sign in"}
           </button>
