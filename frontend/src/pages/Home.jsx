@@ -9,6 +9,8 @@ function Home({
   setDarkMode,
   onLogout,
   setProfileUsername,
+  onLogin,
+  onRegister,
 }) {
   const { user } = useAuth();
 
@@ -315,39 +317,53 @@ function Home({
               : "🌙 Dark Mode"}
           </button>
 
-          <button onClick={onLogout}>
-            Logout
-          </button>
+          {user ? (
+            <button onClick={onLogout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <button onClick={onLogin}>
+                Login
+              </button>
+
+              <button onClick={onRegister}>
+                Sign up
+              </button>
+            </>
+          )}
         </div>
       </header>
 
       <div className="home-layout">
         <aside className="sidebar">
-          <div
-            className="sidebar-profile"
-            onClick={() =>
-              setPage(
-                "profile",
-                user?.username
-              )
-            }
-          >
-            {user?.avatar ? (
-              <img
-                className="sidebar-profile-photo"
-                src={user.avatar}
-                alt="Profile"
-              />
-            ) : (
-              <div className="sidebar-profile-placeholder">
-                👤
-              </div>
-            )}
+          {user && (
+            <div
+              className="sidebar-profile"
+              onClick={() =>
+                setPage(
+                  "profile",
+                  user.username
+                )
+              }
+            >
+              {user.avatar ? (
+                <img
+                  className="sidebar-profile-photo"
+                  src={user.avatar}
+                  alt="Profile"
+                />
+              ) : (
+                <div className="sidebar-profile-placeholder">
+                  👤
+                </div>
+              )}
 
-            <span className="sidebar-username">
-              @{user?.username}
-            </span>
-          </div>
+              <span className="sidebar-username">
+                @{user.username}
+              </span>
+            </div>
+)}
 
           <div className="sidebar-search">
             <input

@@ -12,15 +12,18 @@ function App() {
   const { user, loading, logout } = useAuth();
 
   const [showRegister, setShowRegister] =
-  useState(false);
+    useState(false);
+
+  const [showLoginPage, setShowLoginPage] =
+    useState(false);
 
   const [loginSuccess, setLoginSuccess] = useState("");
 
   const [showForgotPassword, setShowForgotPassword] =
-  useState(false);
+    useState(false);
 
   const [resetUsername, setResetUsername] =
-  useState("");
+    useState("");
 
   const [page, setPage] = useState(
     window.location.pathname === "/profile"
@@ -101,6 +104,7 @@ function App() {
       <Logout
         onLogin={() => {
           setShowLogoutPage(false);
+          setShowLoginPage(true);
         }}
         onHome={() => {
           setShowLogoutPage(false);
@@ -114,6 +118,7 @@ function App() {
       <ForgotPassword
         onLogin={() => {
           setShowForgotPassword(false);
+          setShowLoginPage(true);
         }}
         onResetPassword={(username) => {
           setResetUsername(username);
@@ -129,12 +134,13 @@ function App() {
         username={resetUsername}
         onLogin={() => {
           setResetUsername("");
-
           setLoginSuccess("");
+          setShowLoginPage(true);
         }}
         onResetSuccess={(message) => {
           setResetUsername("");
           setLoginSuccess(message);
+          setShowLoginPage(true);
         }}
       />
     );
@@ -146,41 +152,46 @@ function App() {
         onLogin={() => {
           setShowRegister(false);
           setLoginSuccess("");
+          setShowLoginPage(true);
         }}
         onRegisterSuccess={(message) => {
           setShowRegister(false);
           setLoginSuccess(message);
+          setShowLoginPage(true);
         }}
       />
     );
   }
 
-  if (!user) {
+  if (!user && showLoginPage) {
     return (
       <Login
         success={loginSuccess}
         onLoginSuccess={() => {
           setLoginSuccess("");
-          }}        
+          setShowLoginPage(false);
+        }}
         onRegister={() => {
           setLoginSuccess("");
+          setShowLoginPage(false);
           setShowRegister(true);
         }}
         onForgotPassword={() => {
           setLoginSuccess("");
+          setShowLoginPage(false);
           setShowForgotPassword(true);
         }}
       />
     );
   }
 
-
   const handleLogout = () => {
     logout();
 
     setPage("home");
     setProfileUsername(null);
-    setShowLogoutPage(true);
+    setShowLogoutPage(false);
+    setShowLoginPage(false);
   };
 
   return (
@@ -200,6 +211,12 @@ function App() {
           setProfileUsername={
             setProfileUsername
           }
+          onLogin={() => {
+            setShowLoginPage(true);
+          }}
+          onRegister={() => {
+            setShowRegister(true);
+          }}
         />
       )}
 

@@ -761,7 +761,10 @@
   overflow: hidden;
   background: #1e293b;
   border: 1px solid #334155;
+  max-height: 250px;
+  overflow-y: auto;
 }
+
 
 .search-result {
   width: 100%;
