@@ -8,11 +8,8 @@ The project includes authentication, user profiles, tweets, image uploads, likes
 
 ## 🚀 Live Demo
 
-**Frontend:**
 https://xclone-qeio.onrender.com
 
-**Backend API:**
-https://xclone-backend-3o14.onrender.com
 
 ---
 
